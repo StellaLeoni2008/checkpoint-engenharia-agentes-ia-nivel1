@@ -37,7 +37,7 @@ O fluxo foi desenvolvido utilizando um grafo de agentes com **LangGraph**.
 
 ## 🔄 Diagrama do Grafo
 
-![Diagrama do Grafo](./grafo_moderacao.png)
+<img width="200" height="340" alt="grafo_moderacao - cópia" src="https://github.com/user-attachments/assets/2812fdae-fde8-470b-bfe2-bd7b74816d39" />
 
 ---
 
