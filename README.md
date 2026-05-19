@@ -82,7 +82,58 @@ Principais conceitos trabalhados:
 - Separação de responsabilidades entre componentes
 - Orquestração de agentes com LangGraph
 Além disso, o projeto permitiu compreender melhor como sistemas de IA podem combinar automação com supervisão humana, tornando o fluxo mais seguro, interpretável e próximo de aplicações reais.
+
 ---
+
+## ▶️ Como Executar
+
+### 1. Clone o repositório
+
+```bash
+git clone https://github.com/StellaLeoni2008/checkpoint-engenharia-agentes-ia-nivel1.git
+cd checkpoint-engenharia-agentes-ia-nivel1
+```
+
+### 2. Crie e ative um ambiente virtual
+
+#### macOS/Linux
+
+```bash
+python3 -m venv venv
+source venv/bin/activate
+```
+
+#### Windows
+
+```bash
+python -m venv venv
+venv\Scripts\activate
+```
+
+### 3. Instale as dependências
+
+```bash
+pip install -r requirements.txt
+```
+
+### 4. Configure as variáveis de ambiente
+
+Crie um arquivo `.env` na raiz do projeto:
+
+```env
+GEMINI_API_KEY=sua_chave_gemini
+TAVILY_API_KEY=sua_chave_tavily
+```
+
+### 5. Execute o projeto
+
+```bash
+python agentes.py
+```
+
+---
+
+
 
 ## Autores 
 | [<img loading="lazy" src="https://avatars.githubusercontent.com/u/237313711?v=4" width=115><br><sub>Stella Leoni</sub>](https://github.com/StellaLeoni2008) | 
