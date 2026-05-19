@@ -10,7 +10,7 @@ from langgraph.checkpoint.memory import InMemorySaver
 
 load_dotenv()
 
-os.environ['GOOGLE_API_KEY'] = os.getenv('GEMINI_API_KEY')
+os.environ['GEMINI_API_KEY'] = os.getenv('GEMINI_API_KEY')
 os.environ['TAVILY_API_KEY'] = os.getenv('TAVILY_API_KEY')
 
 # Criação do AgentState como um TypedDict
@@ -42,20 +42,41 @@ def analyzer_agent(state: AgentState):
     Responda apenas com o nome da categoria.
     """
 
-    response = model.invoke(prompt)
-
-    return {
+    try: 
+        response = model.invoke(prompt)
+        return {
         "analise_do_agente": response.content.strip().lower()
-    }
+        }
+    
+    except Exception as erro:
+        print(f"Erro ao analisar comentário: {erro}")
+        return {
+        "analise_do_agente": "seguro"
+        }
 
 # Agente Pesquisador de Políticas
 def policy_researcher_agent(state: AgentState):
     if state["analise_do_agente"] in ["spam", "linguagem inadequada", "assédio"]:
-        resultado = tavily.search("diretrizes da comunidade para moderação de comentários")
-        politicas = [item["content"] for item in resultado.get("results", [])]
-        return {"politicas_relevantes": politicas}
+        try:
+            resultado = tavily.search(
+                "diretrizes da comunidade para moderação de comentários"
+            )
 
-    return {"politicas_relevantes": []}
+            politicas = [
+                item["content"]
+                for item in resultado.get("results", [])
+            ]
+            return {
+                "politicas_relevantes": politicas
+             }
+        
+        except Exception as erro:
+            print(f"Erro ao pesquisar políticas: {erro}")
+            return {
+                "politicas_relevantes": [
+                "Não foi possível buscar políticas externas."
+                ]
+            }
 
 #Agente Revisor
 def review_agent(state: AgentState):
@@ -199,10 +220,3 @@ if __name__ == "__main__":
 
     print("\n--- RESULTADO FINAL ---")
     print(estado_final)
-
-
-
-
-
-
-
